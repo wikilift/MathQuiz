@@ -33,7 +33,7 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
     private lateinit var binding: FragmentMainScreenBinding
     private var result: Int = 0
     private var answered = false
-    private var fail: String? = "${getText(R.string.no_sense)}"
+    private var fail: String? = "Sin respuesta"
     private lateinit var gson: Gson
     private var back = false
     private val viewModel by viewModels<NumberViewModel> {
@@ -61,8 +61,8 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
         back = false
         binding.btnAnswer.visibility = View.GONE
         binding.txtTablero?.text = "${getText(R.string.student)}: ${MainActivity.user?.name}\n" +
-                "${getText(R.string.points)}: ${MainActivity.user?.points}/100\n" +
-                "${getText(R.string.level)}: ${MainActivity.user?.level}"
+               "${getText(R.string.points)}: ${MainActivity.user?.points}/100\n" +
+               "${getText(R.string.level)}: ${MainActivity.user?.level}"
         binding.txtCounter.visibility = View.VISIBLE
         countdown()
         answered = false
@@ -197,7 +197,7 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
             R.anim.buttonanim
         )
         binding.btnAnswer?.backgroundTintList = ColorStateList.valueOf(Color.rgb(255, 0, 0))
-        binding.btnAnswer?.text = "$fail"
+        binding.btnAnswer?.text = "${fail.toString()}"
         binding.btnAnswer?.visibility = View.VISIBLE
         binding.btn1?.visibility = View.GONE
         binding.btn2?.visibility = View.GONE

@@ -33,7 +33,7 @@ class FragmentMultiply : Fragment(R.layout.fragment_multiply), View.OnClickListe
     private lateinit var binding: FragmentMainScreenBinding
     private var result: Int = 0
     private var answered = false
-    private var fail: String? = "${getText(R.string.no_sense)}"
+    private var fail: String? = "Sin respuesta"
     private lateinit var gson: Gson
     private var back = false
     private val viewModel by viewModels<NumberViewModel> {
