@@ -5,13 +5,15 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+
 import com.google.gson.Gson
 import com.wikilift.aprendeasumar.data.model.User
+import com.wikilift.aprendeasumar.ui.IOnBackPressed
 
 
 class MainActivity : AppCompatActivity() {
     private lateinit var gson: Gson
-    private var jsonString:String?=null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -19,17 +21,27 @@ class MainActivity : AppCompatActivity() {
         prefs = Prefs(applicationContext)
 
 
-
     }
-
-
 
     companion object {
         lateinit var prefs: Prefs
-         var user: User?=null
+        var user: User? = null
 
     }
 
+    override fun onBackPressed() {
+        val navHost = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
+        navHost?.let { navFragment ->
+            navFragment.childFragmentManager.primaryNavigationFragment?.let { fragment ->
+                (fragment as? IOnBackPressed)?.onBackPressed()?.not()?.let { isCanceled: Boolean ->
+
+                    if (!isCanceled) {
+                        super.onBackPressed()
+                    }
+                }
+            }
+        }
+    }
 }
 class Prefs (context: Context) {
     val PREFS_NAME = "com.wikilift.aprendeasumar"

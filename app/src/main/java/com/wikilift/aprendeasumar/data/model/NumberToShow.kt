@@ -7,15 +7,25 @@ data class NumberToShow(
     val number2: Int,
     val fakeSolution: Int,
     val fakeSolution2: Int,
-    val acertado: Boolean = false,
+    var operation: Int = 0
+
 
 ) {
-    var array = ArrayList<Int>()
+    var array = mutableListOf<Int>()
 
-    fun getChallenge(): Int = number1 + number2
+    fun getChallenge(): Int {
+        return when (operation) {
+            1 -> number1 + number2
+            2 -> number1 - number2
+            3 -> number1 * number2
+            else -> -1
+        }
 
 
-    fun getRandom(): ArrayList<Int> {
+    }
+
+
+    fun getRandom(): MutableList<Int> {
         while (array.size < 3) {
             var teste: Int = gettRandom()
             if (!array.contains(teste)) {
@@ -30,23 +40,21 @@ data class NumberToShow(
     private fun gettRandom(): Int = (1..3).random()
 
 
-    fun getRandomButton(lista:Int): String {
+    fun getRandomButton(lista: Int): String {
 
         return when (lista) {
-            1 -> {
-                "$fakeSolution"
-            }
-            2 -> {
-                "$fakeSolution2"
-            }
+            1 -> "$fakeSolution"
 
-            else -> {
-                "${getChallenge()}"
-            }
+            2 -> "$fakeSolution2"
+
+
+            3 -> "${getChallenge()}"
+
+            else -> "ERROR"
         }
 
 
-        }
+    }
 
 
 }

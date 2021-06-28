@@ -14,7 +14,7 @@ data class User(
     fun levelUp(point: Int) {
 
         MainActivity.user?.points = MainActivity.user?.points?.plus(point)!!
-        if (MainActivity.user?.points == 1000) {
+        if (MainActivity.user?.points == 100) {
             MainActivity.user?.level =MainActivity.user?.points?.plus(1)!!
 
         }

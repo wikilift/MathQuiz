@@ -17,6 +17,24 @@
         tools:layout="@layout/fragment_landing" >
         <action
             android:id="@+id/action_landingFragment_to_mainScreen"
+            app:destination="@id/mainScreen"
+            app:enterAnim="@anim/slide_from_left"
+            app:exitAnim="@anim/slide_from_left"
+            app:popEnterAnim="@anim/slide_to_left"
+            app:popExitAnim="@anim/slide_to_left" />
+        <action
+            android:id="@+id/action_landingFragment_to_selectorOperaciones"
+            app:destination="@id/selectorOperaciones"
+            app:enterAnim="@anim/slide_from_left"
+            app:popEnterAnim="@anim/slide_from_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/selectorOperaciones"
+        android:name="com.wikilift.aprendeasumar.ui.SelectorOperaciones"
+        android:label="fragment_selector_operaciones"
+        tools:layout="@layout/fragment_selector_operaciones" >
+        <action
+            android:id="@+id/action_selectorOperaciones_to_mainScreen"
             app:destination="@id/mainScreen" />
     </fragment>
 </navigation>

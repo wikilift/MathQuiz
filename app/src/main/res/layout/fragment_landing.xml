@@ -80,16 +80,6 @@
         android:visibility="gone"
         app:cornerRadius="8dp" />
 
-    <TextView
-        android:id="@+id/txt_notYou"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:gravity="center"
-        android:text="No eres"
-        android:textColor="@color/WhiteSmoke"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:visibility="gone" />
+
 
 </LinearLayout>

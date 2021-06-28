@@ -2,16 +2,16 @@ package com.wikilift.aprendeasumar.ui
 
 import android.content.res.ColorStateList
 import android.graphics.Color
-import android.os.Build
+
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.SystemClock
+
 
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.Toast
-import androidx.annotation.RequiresApi
+
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -28,12 +28,14 @@ import com.wikilift.aprendeasumar.viewModel.NumberViewModel
 import com.wikilift.aprendeasumar.viewModel.NumberViewModelFactory
 
 
-class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener {
+class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener,IOnBackPressed {
 
     private lateinit var binding: FragmentMainScreenBinding
     private var result: Int = 0
     private var answered = false
+    private var fail:String?="Sin respuesta"
     private lateinit var gson: Gson
+    private var back=false
     private val viewModel by viewModels<NumberViewModel> {
         NumberViewModelFactory(NumberRepoImpl(NumberDataSource()))
     }
@@ -53,11 +55,13 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
     }
 
 
-    fun init() {
+    private fun init() {
         restoreColor()
         toggleDeactivateClick(true)
+        back=false
+        binding.btnAnswer.visibility = View.GONE
         binding.txtTablero?.text = "Alumno: ${MainActivity.user?.name}\n" +
-                "Puntos: ${MainActivity.user?.points}/1000\n" +
+                "Puntos: ${MainActivity.user?.points}/100\n" +
                 "Nivel: ${MainActivity.user?.level}"
         binding.txtCounter.visibility = View.VISIBLE
         countdown()
@@ -72,12 +76,14 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
         binding.btn2.setOnClickListener(this)
         binding.btn3.setOnClickListener(this)
         var obj = viewModel.fetchInfo()
-        var test: ArrayList<Int> = obj.getRandom()
+        obj.operation=1
+        var test: MutableList<Int> = obj.getRandom()
         result = obj.getChallenge()
+
         binding.txtAsk.text = "${obj.number1}+${obj.number2}="
-        binding.btn1.text = "${obj.getRandomButton(test.indexOf(1))}"
-        binding.btn2.text = "${obj.getRandomButton(test.indexOf(3))}"
-        binding.btn3.text = "${obj.getRandomButton(test.indexOf(2))}"
+        binding.btn1.text = "${obj.getRandomButton(test[0])}"
+        binding.btn2.text = "${obj.getRandomButton(test[1])}"
+        binding.btn3.text = "${obj.getRandomButton(test[2])}"
 
 
     }
@@ -86,9 +92,9 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
         val obj = MainActivity.user?.level
         var time: Long = 10000
         when (obj) {
-            0 -> 10000
-            1 -> 8000
-            2 -> 5000
+            0 -> time = 10000
+            1 -> time = 8000
+            2 -> time = 5000
 
         }
         object : CountDownTimer(time, 1000) {
@@ -104,26 +110,17 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
                 if (answered) {
                     cancel()
                 } else {
-                    val animation: Animation = AnimationUtils.loadAnimation(
-                        context,
-                        R.anim.buttonanim
-                    )
-                    binding.btn1?.visibility = View.GONE
-                    binding.btn2?.visibility = View.GONE
-                    binding.btn3?.visibility = View.GONE
-                    binding.txtCounter?.visibility = View.GONE
-                    binding.btnNext?.visibility = View.VISIBLE
+                    if (!back){
+                        fail()
+                    }
 
-                    binding.txtAsk?.startAnimation(animation)
-                    binding.txtAsk?.append("\n ¡TIEMPO! \n Respuesta:\n${result}")
-                    toggleDeactivateClick(false)
+
                 }
-
-            }
+             }
         }.start()
     }
 
-    fun toggleDeactivateClick(toggle: Boolean) {
+    private fun toggleDeactivateClick(toggle: Boolean) {
         when (toggle) {
             true -> {
                 binding.btn1?.isClickable = true
@@ -139,113 +136,52 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
 
     }
 
-    fun restoreColor() {
+    private fun restoreColor() {
         binding.btn1?.backgroundTintList = ColorStateList.valueOf(Color.rgb(52, 180, 235))
         binding.btn2?.backgroundTintList = ColorStateList.valueOf(Color.rgb(52, 180, 235))
         binding.btn3?.backgroundTintList = ColorStateList.valueOf(Color.rgb(52, 180, 235))
     }
 
     override fun onClick(v: View?) {
-        val animation: Animation = AnimationUtils.loadAnimation(
+        val animation: Animation? = AnimationUtils.loadAnimation(
             context,
             R.anim.buttonanim
         )
         when (v) {
             binding.btn1 -> {
 
-                binding.btn1.startAnimation(animation)
+                binding.btn1?.startAnimation(animation)
                 if (binding.btn1?.text.equals(result.toString())) {
-                    binding.btn1.backgroundTintList = ColorStateList.valueOf(Color.rgb(0, 255, 0))
-
-                    binding.btn2.visibility = View.GONE
-                    binding.btn3.visibility = View.GONE
-                    binding.btnNext.visibility = View.VISIBLE
-                    binding.txtCounter.visibility = View.GONE
-                    binding.txtAsk.startAnimation(animation)
-                    binding.txtAsk.append("\n ¡CORRECTO!")
-                    toggleDeactivateClick(false)
-                    answered = true
-                    saveLevelPoint()
+                    succes()
 
                 } else {
-                    binding.btn1?.backgroundTintList = ColorStateList.valueOf(Color.rgb(255, 0, 0))
-
-                    binding.btn2.visibility = View.GONE
-                    binding.btn3.visibility = View.GONE
-                    binding.btnNext.visibility = View.VISIBLE
-                    binding.txtCounter.visibility = View.GONE
-                    binding.txtAsk.startAnimation(animation)
-                    binding.txtAsk.append("\n ¡ERROR! \n Respuesta:\n${result}")
-                    toggleDeactivateClick(false)
-                    answered = true
+                    fail=binding.btn1.text.toString()
+                    fail()
                 }
             }
             binding.btn2 -> {
 
-                binding.btn2.startAnimation(animation)
+                binding.btn2?.startAnimation(animation)
                 if (binding.btn2?.text.equals(result.toString())) {
-                    binding.btn2?.backgroundTintList = ColorStateList.valueOf(Color.rgb(0, 255, 0))
-
-                    binding.btn1.visibility = View.GONE
-                    binding.btn3.visibility = View.GONE
-                    binding.btnNext.visibility = View.VISIBLE
-                    binding.txtCounter.visibility = View.GONE
-                    binding.txtAsk.startAnimation(animation)
-                    binding.txtAsk.append("\n ¡CORRECTO!")
-                    toggleDeactivateClick(false)
-                    answered = true
-                    saveLevelPoint()
+                    succes()
 
 
                 } else {
-                    binding.btn2?.backgroundTintList = ColorStateList.valueOf(Color.rgb(255, 0, 0))
-
-                    binding.btn1.visibility = View.GONE
-                    binding.btn3.visibility = View.GONE
-                    binding.btnNext.visibility = View.VISIBLE
-                    binding.txtCounter.visibility = View.GONE
-                    binding.txtAsk.startAnimation(animation)
-                    binding.txtAsk.append(
-                        "\n ¡ERROR!\n" +
-                                " Respuesta:\n${result}"
-                    )
-                    toggleDeactivateClick(false)
-                    answered = true
+                    fail=binding.btn2.text.toString()
+                    fail()
 
                 }
             }
             binding.btn3 -> {
 
-                binding.btn3.startAnimation(animation)
+                binding.btn3?.startAnimation(animation)
                 if (binding.btn3?.text.equals(result.toString())) {
-                    binding.btn3?.backgroundTintList = ColorStateList.valueOf(Color.rgb(0, 255, 0))
+                    succes()
 
-                    binding.btn1.visibility = View.GONE
-                    binding.btn2.visibility = View.GONE
-                    binding.btnNext.visibility = View.VISIBLE
-                    binding.txtCounter.visibility = View.GONE
-                    binding.txtAsk.startAnimation(animation)
-                    binding.txtAsk.append("\n ¡CORRECTO!")
-                    toggleDeactivateClick(false)
-                    answered = true
-                    saveLevelPoint()
-                    Toast.makeText(context, "${MainActivity.user?.points}", Toast.LENGTH_SHORT)
-                        .show()
 
                 } else {
-                    binding.btn3?.backgroundTintList = ColorStateList.valueOf(Color.rgb(255, 0, 0))
-
-                    binding.btn1.visibility = View.GONE
-                    binding.btn2.visibility = View.GONE
-                    binding.btnNext.visibility = View.VISIBLE
-                    binding.txtCounter.visibility = View.GONE
-                    binding.txtAsk.startAnimation(animation)
-                    binding.txtAsk.append(
-                        "\n ¡ERROR!\n" +
-                                " Respuesta:\n${result}"
-                    )
-                    toggleDeactivateClick(false)
-                    answered = true
+                    fail=binding.btn3.text.toString()
+                    fail()
 
                 }
             }
@@ -254,9 +190,64 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
 
     }
 
+    private fun fail() {
+        val animation: Animation? = AnimationUtils.loadAnimation(
+            context,
+            R.anim.buttonanim
+        )
+        binding.btnAnswer?.backgroundTintList = ColorStateList.valueOf(Color.rgb(255, 0, 0))
+        binding.btnAnswer?.text = "$fail"
+        binding.btnAnswer?.visibility = View.VISIBLE
+        binding.btn1?.visibility = View.GONE
+        binding.btn2?.visibility = View.GONE
+        binding.btn3?.visibility = View.GONE
+        binding.btnNext?.visibility = View.VISIBLE
+        binding.txtCounter?.visibility = View.GONE
+        binding.btnAnswer?.startAnimation(animation)
+        binding.txtAsk?.startAnimation(animation)
+        binding.txtAsk?.append(
+            "\n ¡ERROR!\n" +
+                    " Respuesta:\n${result}"
+        )
+        toggleDeactivateClick(false)
+        answered = true
+    }
+
+    private fun succes() {
+        val animation: Animation? = AnimationUtils.loadAnimation(
+            context,
+            R.anim.buttonanim
+        )
+
+        binding.btnAnswer.backgroundTintList = ColorStateList.valueOf(Color.rgb(0, 255, 0))
+        binding.btnAnswer.text = "$result"
+        binding.btnAnswer.visibility = View.VISIBLE
+        binding.btn1.visibility = View.GONE
+        binding.btn2.visibility = View.GONE
+        binding.btn3.visibility = View.GONE
+        binding.btnNext.visibility = View.VISIBLE
+        binding.txtCounter.visibility = View.GONE
+        binding.txtAsk?.startAnimation(animation)
+        binding.btnAnswer?.startAnimation(animation)
+        binding.txtAsk.append("\n ¡CORRECTO!")
+        toggleDeactivateClick(false)
+        answered = true
+        saveLevelPoint()
+    }
+
     private fun saveLevelPoint() {
         MainActivity.user?.levelUp(1)
-        var jsonStrings = gson.toJson(MainActivity.user)
+        val jsonStrings = gson.toJson(MainActivity.user)
         MainActivity.prefs.name = jsonStrings
     }
+
+    override fun onBackPressed(): Boolean {
+        back=true
+
+        return back
+    }
+
+}
+interface IOnBackPressed {
+    fun onBackPressed(): Boolean
 }
