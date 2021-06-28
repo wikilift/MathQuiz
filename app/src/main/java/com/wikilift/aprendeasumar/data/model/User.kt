@@ -12,12 +12,13 @@ data class User(
     var level: Int=0
 ):Serializable {
     fun levelUp(point: Int) {
-
-        MainActivity.user?.points = MainActivity.user?.points?.plus(point)!!
-        if (MainActivity.user?.points == 100) {
-            MainActivity.user?.level =MainActivity.user?.points?.plus(1)!!
+        if (MainActivity.user?.points!! >= 100) {
+            MainActivity.user?.level =MainActivity.user?.level?.plus(1)!!
+            MainActivity.user?.points=0
 
         }
+        MainActivity.user?.points = MainActivity.user?.points?.plus(point)!!
+
     }
 }
 

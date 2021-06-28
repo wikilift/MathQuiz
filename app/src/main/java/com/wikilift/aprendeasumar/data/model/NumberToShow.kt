@@ -1,6 +1,6 @@
 package com.wikilift.aprendeasumar.data.model
 
-import android.widget.Toast
+
 
 data class NumberToShow(
     val number1: Int,
@@ -18,6 +18,7 @@ data class NumberToShow(
             1 -> number1 + number2
             2 -> number1 - number2
             3 -> number1 * number2
+            4->number1 / number2
             else -> -1
         }
 

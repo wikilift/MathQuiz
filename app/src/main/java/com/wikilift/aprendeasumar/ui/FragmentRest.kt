@@ -1,5 +1,7 @@
 package com.wikilift.aprendeasumar.ui
 
+
+
 import android.content.res.ColorStateList
 import android.graphics.Color
 
@@ -10,7 +12,7 @@ import android.os.CountDownTimer
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Toast
+
 
 
 import androidx.fragment.app.Fragment
@@ -28,7 +30,7 @@ import com.wikilift.aprendeasumar.viewModel.NumberViewModel
 import com.wikilift.aprendeasumar.viewModel.NumberViewModelFactory
 
 
-class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener, IOnBackPressed {
+class FragmentRest : Fragment(R.layout.fragment_rest), View.OnClickListener, IOnBackPressed {
 
     private lateinit var binding: FragmentMainScreenBinding
     private var result: Int = 0
@@ -76,11 +78,11 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
         binding.btn2.setOnClickListener(this)
         binding.btn3.setOnClickListener(this)
         var obj = viewModel.fetchInfo()
-        obj.operation = 1
+        obj.operation = 2
         var test: MutableList<Int> = obj.getRandom()
         result = obj.getChallenge()
 
-        binding.txtAsk.text = "${obj.number1}+${obj.number2}="
+        binding.txtAsk.text = "${obj.number1}-${obj.number2}="
         binding.btn1.text = "${obj.getRandomButton(test[0])}"
         binding.btn2.text = "${obj.getRandomButton(test[1])}"
         binding.btn3.text = "${obj.getRandomButton(test[2])}"
@@ -250,3 +252,6 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
 
 }
 
+interface IOnBackPressed {
+    fun onBackPressed(): Boolean
+}

@@ -62,7 +62,7 @@ class LandingFragment : Fragment(R.layout.fragment_landing) {
                 binding.progressBar.visibility = View.VISIBLE
                 Handler(Looper.getMainLooper()).postDelayed({
                     binding.progressBar.visibility = View.GONE
-                    findNavController().navigate(R.id.action_landingFragment_to_mainScreen)
+                    findNavController().navigate(R.id.action_landingFragment_to_selectorOperaciones)
                 }, 2000)
 
 
@@ -83,7 +83,7 @@ class LandingFragment : Fragment(R.layout.fragment_landing) {
             binding.progressBar.visibility = View.VISIBLE
             Handler(Looper.getMainLooper()).postDelayed({
                 binding.progressBar.visibility = View.GONE
-                findNavController().navigate(R.id.action_landingFragment_to_mainScreen)
+                findNavController().navigate(R.id.action_landingFragment_to_selectorOperaciones)
             }, 3000)
 
         } else {
