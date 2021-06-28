@@ -44,7 +44,7 @@ class LandingFragment : Fragment(R.layout.fragment_landing) {
 
         binding.btnSignin.setOnClickListener {
             if (binding.txtName.length() < 3) {
-                binding.txtName.error = "Debe introducir un nombre"
+                binding.txtName.error = "${getText(R.string.must_name)}"
             } else {
 
 

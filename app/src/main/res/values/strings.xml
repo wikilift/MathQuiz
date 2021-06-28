@@ -1,5 +1,26 @@
 <resources>
-    <string name="app_name">AprendeASumar</string>
+    <string name="app_name">AprendeMatemáticas</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="points">Puntos</string>
+    <string name="level">Nivel</string>
+    <string name="student">Alumno</string>
+    <string name="error">¡ERROR!</string>
+    <string name="answer">Respuesta</string>
+    <string name="correct">¡Correcto!</string>
+    <string name="no_sense">Sin respuesta</string>
+    <string name="must_name">Debe introducir un nombre</string>
+    <string name="division">DIVISIÓN</string>
+    <string name="welcome">BIENVENID@</string>
+    <string name="insert_name">Introduce tu nombre</string>
+    <string name="sum">SUMA</string>
+    <string name="multiply">MULTIPLICACIÓN</string>
+    <string name="rest">RESTA</string>
+    <string name="profile">PERFIL</string>
+    <string name="ok">ok</string>
+    <string name="disclaimer">Esta aplicación ha sido desarrollada con fines educativos \n como trabajo en el centro de estudios \n
+                                y sin ánimo de lucro. WikiLift.</string>
+    <string name="apprentice">Aprendiz</string>
+    <string name="clever">Muy inteligente</string>
+    <string name="genius">Genio</string>
 </resources>

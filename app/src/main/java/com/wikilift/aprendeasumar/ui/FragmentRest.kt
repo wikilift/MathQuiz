@@ -35,7 +35,7 @@ class FragmentRest : Fragment(R.layout.fragment_rest), View.OnClickListener, IOn
     private lateinit var binding: FragmentMainScreenBinding
     private var result: Int = 0
     private var answered = false
-    private var fail: String? = "Sin respuesta"
+    private var fail: String? = "${getText(R.string.no_sense)}"
     private lateinit var gson: Gson
     private var back = false
     private val viewModel by viewModels<NumberViewModel> {
@@ -62,9 +62,9 @@ class FragmentRest : Fragment(R.layout.fragment_rest), View.OnClickListener, IOn
         toggleDeactivateClick(true)
         back = false
         binding.btnAnswer.visibility = View.GONE
-        binding.txtTablero?.text = "Alumno: ${MainActivity.user?.name}\n" +
-                "Puntos: ${MainActivity.user?.points}/100\n" +
-                "Nivel: ${MainActivity.user?.level}"
+        binding.txtTablero?.text = "${getText(R.string.student)}: ${MainActivity.user?.name}\n" +
+                "${getText(R.string.points)}: ${MainActivity.user?.points}/100\n" +
+                "${getText(R.string.level)}: ${MainActivity.user?.level}"
         binding.txtCounter.visibility = View.VISIBLE
         countdown()
         answered = false
@@ -209,8 +209,8 @@ class FragmentRest : Fragment(R.layout.fragment_rest), View.OnClickListener, IOn
         binding.btnAnswer?.startAnimation(animation)
         binding.txtAsk?.startAnimation(animation)
         binding.txtAsk?.append(
-            "\n ¡ERROR!\n" +
-                    " Respuesta:\n${result}"
+            "\n ${getText(R.string.error)}\n" +
+                    " ${getText(R.string.answer)}:\n${result}"
         )
         toggleDeactivateClick(false)
         answered = true
@@ -232,7 +232,7 @@ class FragmentRest : Fragment(R.layout.fragment_rest), View.OnClickListener, IOn
         binding.txtCounter.visibility = View.GONE
         binding.txtAsk?.startAnimation(animation)
         binding.btnAnswer?.startAnimation(animation)
-        binding.txtAsk.append("\n ¡CORRECTO!")
+        binding.txtAsk.append("\n ${getText(R.string.correct)}")
         toggleDeactivateClick(false)
         answered = true
         saveLevelPoint()

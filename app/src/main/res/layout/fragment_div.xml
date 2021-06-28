@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:gravity="center"
-            android:text="/DIVISIÓN/"
+            android:text="@string/division"
             android:textColor="@color/WhiteSmoke"
             android:textSize="50sp"
             android:textStyle="bold"

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LearnMaths</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="points">Points</string>
+    <string name="level">Level</string>
+    <string name="student">Student</string>
+    <string name="error">¡ERROR!</string>
+    <string name="answer">Answer</string>
+    <string name="correct">¡Correct!</string>
+    <string name="no_sense">Without answer</string>
+    <string name="must_name">Must insert name</string>
+    <string name="division">DIVISION</string>
+    <string name="welcome">WELCOME</string>
+    <string name="insert_name">Insert yout name</string>
+    <string name="sum">SUM</string>
+    <string name="multiply">MULTIPLY</string>
+    <string name="rest">REST</string>
+    <string name="profile">PROFILE</string>
+    <string name="ok">ok</string>
+    <string name="disclaimer">This application has been developed for educational purposes \n as work in the study center \n
+                                and non-profit. WikiLift.</string>
+    <string name="apprentice">Apprentice</string>
+    <string name="clever">Very clever</string>
+    <string name="genius">Genius</string>
+</resources>

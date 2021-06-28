@@ -21,7 +21,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="40dp"
         android:gravity="center"
-        android:text="Bienvenid@"
+        android:text="@string/welcome"
         android:textColor="@color/WhiteSmoke"
         android:textSize="60sp"
         android:textStyle="bold" />
@@ -54,7 +54,7 @@
         android:layout_marginTop="8dp"
 
 
-        android:hint="Introduce tu nombre">
+        android:hint="@string/insert_name">
 
 
         <com.google.android.material.textfield.TextInputEditText

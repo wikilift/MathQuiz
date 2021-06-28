@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="top"
             android:gravity="center"
-            android:text="+SUMA+"
+            android:text="@string/sum"
             android:textColor="@color/white"
             android:textSize="60sp"
             android:textStyle="bold"

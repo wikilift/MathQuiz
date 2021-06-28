@@ -28,7 +28,7 @@
         android:layout_gravity="bottom"
 
         android:gravity="left"
-        android:text="SUMAR"
+        android:text="@string/sum"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -57,7 +57,7 @@
         android:layout_gravity="bottom"
 
         android:gravity="left"
-        android:text="DIVIDIR"
+        android:text="@string/division"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -84,7 +84,7 @@
         android:layout_gravity="bottom"
         android:gravity="left"
 
-        android:text="RESTAR"
+        android:text="@string/rest"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -111,7 +111,7 @@
         android:layout_gravity="bottom"
 
         android:gravity="left"
-        android:text="MULTIPLICAR"
+        android:text="@string/multiply"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
@@ -137,7 +137,7 @@
         android:layout_gravity="bottom"
         android:gravity="left"
 
-        android:text="PERFIL"
+        android:text="@string/profile"
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
