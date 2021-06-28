@@ -7,7 +7,8 @@ data class NumberToShow(
     val number2: Int,
     val fakeSolution: Int,
     val fakeSolution2: Int,
-    val acertado: Boolean = false
+    val acertado: Boolean = false,
+
 ) {
     var array = ArrayList<Int>()
 

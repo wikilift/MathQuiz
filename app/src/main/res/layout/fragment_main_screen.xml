@@ -4,13 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginTop="8dp"
+
     android:layout_weight="1"
     android:gravity="center"
     android:orientation="vertical"
     android:padding="16dp"
     tools:context=".ui.MainScreen"
-    android:background="@drawable/gradient"
+    android:background="@drawable/textureblackboard"
 
     >
 
@@ -19,13 +19,26 @@
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="350dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
        >
+        <TextView
+            android:id="@+id/txt_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="60sp"
+            android:textStyle="bold"
+            android:text="+SUMA+"
+
+            />
 
         <TextView
+            android:layout_marginTop="30dp"
             android:id="@+id/txt_ask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,6 +50,21 @@
             tools:text="5+10="
 
             />
+        <TextView
+            android:layout_marginTop="120dp"
+            android:id="@+id/txt_counter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+
+            android:textColor="@color/white"
+            android:textSize="60sp"
+            android:textStyle="bold"
+            tools:text="5"
+
+            />
+
 
     </FrameLayout>
 
@@ -66,7 +94,7 @@
             android:textStyle="bold"
             app:cornerRadius="8dp"
             tools:text="21"
-            android:backgroundTint="@color/MidnightBlue"
+
             />
 
         <Button
@@ -81,7 +109,7 @@
             android:textStyle="bold"
             app:cornerRadius="8dp"
             tools:text="21"
-            android:backgroundTint="@color/MidnightBlue"/>
+            />
 
         <Button
             android:id="@+id/btn3"
@@ -90,7 +118,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
             android:layout_weight="1"
-            android:backgroundTint="@color/MidnightBlue"
+
             android:textColor="@color/white"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -112,6 +140,22 @@
         app:cornerRadius="8dp"
         android:text="Siguiente"
         android:visibility="gone"
+        />
+    <TextView
+
+        android:id="@+id/txt_tablero"
+        android:layout_marginTop="2dp"
+        android:layout_marginStart="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="left"
+
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:text="Dani 1 puntos"
+
         />
 
 
