@@ -27,4 +27,6 @@
     <string name="library">Enciclopedia Humana</string>
     <string name="nuclear">Sobrehumano</string>
     <string name="robot">Androide</string>
+    <string name="reboot">Reiniciar nivel</string>
+    <string name="sure">Estás segur@ que quieres reinciar?\n esta operación no tiene vuelta atrás</string>
 </resources>

@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import com.google.gson.Gson
 import com.wikilift.aprendeasumar.MainActivity
 import com.wikilift.aprendeasumar.R
 import com.wikilift.aprendeasumar.data.model.User
@@ -18,10 +19,12 @@ import kotlinx.coroutines.NonCancellable.cancel
 class FragmentProfile : Fragment(R.layout.fragment_profile),IOnBackPressed {
 
     private lateinit var binding: FragmentProfileBinding
+    private lateinit var gson:Gson
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding= FragmentProfileBinding.bind(view)
+        gson=Gson()
         val obj: User? =MainActivity.user
         when(obj?.level){
             0->{
@@ -53,9 +56,27 @@ class FragmentProfile : Fragment(R.layout.fragment_profile),IOnBackPressed {
                 binding.circleImageView.setBackgroundResource(R.drawable.genius)
             }
         }
-        binding.profile.text= "${getText(R.string.student)}: ${MainActivity.user?.name}\n" +
-        "${getText(R.string.points)}: ${MainActivity.user?.points}/${MainActivity.user?.pointsToNextLevel}\n" +
-                "${getText(R.string.level)}: ${MainActivity.user?.level}"
+        makeText()
+
+        binding.imgRestore.setOnClickListener{
+            val builder = AlertDialog.Builder(context)
+            builder.setMessage(R.string.sure)
+                .setPositiveButton(R.string.ok,
+                    DialogInterface.OnClickListener { dialog, id ->
+                        MainActivity.user?.level=0
+                        MainActivity.user?.pointsToNextLevel=0
+                        MainActivity.user?.points=0
+                        makeText()
+                        val jsonStrings = gson.toJson(MainActivity.user)
+                        MainActivity.prefs.name = jsonStrings
+                    }).setNegativeButton("cancel",DialogInterface.OnClickListener{dialog,id->
+                        return@OnClickListener
+                })
+
+            // Create the AlertDialog object and return it
+            builder.create()
+            builder.show()
+        }
 
         binding.imgAbout.setOnClickListener{
             val builder = AlertDialog.Builder(context)
@@ -71,6 +92,11 @@ class FragmentProfile : Fragment(R.layout.fragment_profile),IOnBackPressed {
         }
     }
 
+    private fun makeText(){
+        binding.profile.text= "${getText(R.string.student)}: ${MainActivity.user?.name}\n" +
+                "${getText(R.string.points)}: ${MainActivity.user?.points}/${MainActivity.user?.pointsToNextLevel}\n" +
+                "${getText(R.string.level)}: ${MainActivity.user?.level}"
+    }
     override fun onBackPressed(): Boolean =true
 
 }

@@ -28,4 +28,6 @@
     <string name="library">Human encylopedia</string>
     <string name="nuclear">Superhuman</string>
     <string name="robot">Androide</string>
+    <string name="reboot">Reboot level</string>
+    <string name="sure">Are you sure you want to restart? \n this operation has no going back</string>
 </resources>

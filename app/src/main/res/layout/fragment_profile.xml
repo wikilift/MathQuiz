@@ -53,10 +53,52 @@
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="20dp"
+        android:layout_marginEnd="60dp"
         android:background="@drawable/ic_baseline_question_answer_24"
-        app:layout_constraintEnd_toEndOf="@+id/profile"
-        app:layout_constraintStart_toStartOf="@+id/profile"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profile" />
+
+    <TextView
+        android:id="@+id/who"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="About dev"
+        android:textColor="@color/WhiteSmoke"
+        android:textSize="30dp"
+
+
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/img_About"
+        app:layout_constraintStart_toStartOf="@+id/img_About"
+        app:layout_constraintTop_toBottomOf="@+id/img_About" />
+
+    <ImageView
+        android:id="@+id/img_restore"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ic_baseline_settings_backup_restore_24"
+        app:layout_constraintEnd_toStartOf="@+id/img_About"
+        app:layout_constraintHorizontal_bias="0.413"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profile" />
+
+    <TextView
+        android:id="@+id/restore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/reboot"
+        android:textColor="@color/WhiteSmoke"
+        android:textSize="30dp"
+
+
+        android:textStyle="bold"
+
+        app:layout_constraintEnd_toEndOf="@+id/img_restore"
+        app:layout_constraintStart_toStartOf="@+id/img_restore"
+        app:layout_constraintTop_toBottomOf="@+id/img_restore" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

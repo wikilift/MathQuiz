@@ -21,7 +21,7 @@ import com.wikilift.aprendeasumar.databinding.FragmentLandingBinding
 
 
 
-class LandingFragment : Fragment(R.layout.fragment_landing) {
+class LandingFragment : Fragment(R.layout.fragment_landing),IOnBackPressed {
 
     private lateinit var binding: FragmentLandingBinding
     private lateinit var gson: Gson
@@ -94,6 +94,7 @@ class LandingFragment : Fragment(R.layout.fragment_landing) {
         }
     }
 
+    override fun onBackPressed(): Boolean=true
 
 }
 
