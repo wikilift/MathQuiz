@@ -23,6 +23,7 @@ import com.wikilift.aprendeasumar.MainActivity
 import com.wikilift.aprendeasumar.R
 
 import com.wikilift.aprendeasumar.data.local.NumberDataSource
+import com.wikilift.aprendeasumar.data.model.User
 import com.wikilift.aprendeasumar.databinding.FragmentMainScreenBinding
 
 import com.wikilift.aprendeasumar.repository.NumberRepoImpl
@@ -63,7 +64,7 @@ class FragmentRest : Fragment(R.layout.fragment_rest), View.OnClickListener, IOn
         back = false
         binding.btnAnswer.visibility = View.GONE
         binding.txtTablero?.text = "${getText(R.string.student)}: ${MainActivity.user?.name}\n" +
-                "${getText(R.string.points)}: ${MainActivity.user?.points}/100\n" +
+                "${getText(R.string.points)}: ${MainActivity.user?.points}/${MainActivity.user?.pointsToNextLevel}\n" +
                 "${getText(R.string.level)}: ${MainActivity.user?.level}"
         binding.txtCounter.visibility = View.VISIBLE
         countdown()
@@ -91,16 +92,9 @@ class FragmentRest : Fragment(R.layout.fragment_rest), View.OnClickListener, IOn
     }
 
     private fun countdown() {
-        val obj = MainActivity.user?.level
-        var time: Long = 10000
-        time = when (obj) {
-            0 -> 10000
-            1 -> 8500
-            2 -> 5500
-            else -> 3500
+        val obj: User? = MainActivity.user
 
-        }
-        object : CountDownTimer(time, 1000) {
+        object : CountDownTimer(obj!!.getDifficult(), 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 if (answered) {
                     cancel()

@@ -23,5 +23,9 @@
                                 and non-profit. WikiLift.</string>
     <string name="apprentice">Apprentice</string>
     <string name="clever">Very clever</string>
-    <string name="genius">Genius</string>
+    <string name="genius">Genius peerless</string>
+    <string name="graduated">Graduated</string>
+    <string name="library">Human encylopedia</string>
+    <string name="nuclear">Superhuman</string>
+    <string name="robot">Androide</string>
 </resources>

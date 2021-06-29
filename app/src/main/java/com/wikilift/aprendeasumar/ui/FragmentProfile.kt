@@ -30,15 +30,31 @@ class FragmentProfile : Fragment(R.layout.fragment_profile),IOnBackPressed {
             }
             1->{
                 binding.txtGenius.text="${getText(R.string.clever)}"
-                binding.circleImageView.setBackgroundResource(R.drawable.clever)
+                binding.circleImageView.setBackgroundResource(R.drawable.brain)
             }
             2->{
+                binding.txtGenius.text="${getText(R.string.graduated)}"
+                binding.circleImageView.setBackgroundResource(R.drawable.clever)
+            }
+            3->{
+                binding.txtGenius.text="${getText(R.string.library)}"
+                binding.circleImageView.setBackgroundResource(R.drawable.library)
+            }
+            4->{
+                binding.txtGenius.text="${getText(R.string.nuclear)}"
+                binding.circleImageView.setBackgroundResource(R.drawable.nuclear)
+            }
+            5->{
+                binding.txtGenius.text="${getText(R.string.robot)}"
+                binding.circleImageView.setBackgroundResource(R.drawable.robot)
+            }
+            else->{
                 binding.txtGenius.text="${getText(R.string.genius)}"
                 binding.circleImageView.setBackgroundResource(R.drawable.genius)
             }
         }
         binding.profile.text= "${getText(R.string.student)}: ${MainActivity.user?.name}\n" +
-        "${getText(R.string.points)}: ${MainActivity.user?.points}/100\n" +
+        "${getText(R.string.points)}: ${MainActivity.user?.points}/${MainActivity.user?.pointsToNextLevel}\n" +
                 "${getText(R.string.level)}: ${MainActivity.user?.level}"
 
         binding.imgAbout.setOnClickListener{

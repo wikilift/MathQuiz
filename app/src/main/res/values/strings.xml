@@ -22,5 +22,9 @@
                                 y sin ánimo de lucro. WikiLift.</string>
     <string name="apprentice">Aprendiz</string>
     <string name="clever">Muy inteligente</string>
-    <string name="genius">Genio</string>
+    <string name="genius">Genio sin igual</string>
+    <string name="graduated">Graduado</string>
+    <string name="library">Enciclopedia Humana</string>
+    <string name="nuclear">Sobrehumano</string>
+    <string name="robot">Androide</string>
 </resources>
