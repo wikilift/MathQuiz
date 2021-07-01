@@ -2,9 +2,13 @@ package com.wikilift.aprendeasumar
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 
 import com.google.gson.Gson
 import com.wikilift.aprendeasumar.data.model.User
@@ -42,6 +46,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 }
 class Prefs (context: Context) {
     val PREFS_NAME = "com.wikilift.aprendeasumar"

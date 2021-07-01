@@ -1,6 +1,11 @@
 package com.wikilift.aprendeasumar.data.model
 
 
+import android.content.Context
+import android.os.Build
+import android.os.VibrationEffect
+import android.os.Vibrator
+import androidx.fragment.app.Fragment
 import com.wikilift.aprendeasumar.MainActivity
 import java.io.Serializable
 
@@ -98,6 +103,7 @@ data class User(
 
         }
     }
+
 }
 
 

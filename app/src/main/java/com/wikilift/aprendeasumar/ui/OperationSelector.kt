@@ -1,6 +1,10 @@
 package com.wikilift.aprendeasumar.ui
 
+import android.content.Context
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,11 +30,26 @@ class OperationSelector : Fragment(R.layout.fragment_selector_operaciones),View.
 
     override fun onClick(v: View?) {
         when(v){
-            binding.sum->findNavController().navigate(R.id.action_selectorOperaciones_to_mainScreen)
-            binding.rest->findNavController().navigate(R.id.action_selectorOperaciones_to_fragmentRest)
-            binding.multiply->findNavController().navigate(R.id.action_selectorOperaciones_to_fragmentMultiply)
-            binding.div->findNavController().navigate(R.id.action_selectorOperaciones_to_fragmentDiv)
-            binding.imgProfile->findNavController().navigate(R.id.action_selectorOperaciones_to_fragmentProfile)
+            binding.sum->{
+                this.vibratePhone()
+                findNavController().navigate(R.id.action_selectorOperaciones_to_mainScreen)
+            }
+            binding.rest->{
+                this.vibratePhone()
+                findNavController().navigate(R.id.action_selectorOperaciones_to_fragmentRest)
+            }
+            binding.multiply->{
+                this.vibratePhone()
+                findNavController().navigate(R.id.action_selectorOperaciones_to_fragmentMultiply)
+            }
+            binding.div->{
+                this.vibratePhone()
+                findNavController().navigate(R.id.action_selectorOperaciones_to_fragmentDiv)
+            }
+            binding.imgProfile->{
+                this.vibratePhone()
+                findNavController().navigate(R.id.action_selectorOperaciones_to_fragmentProfile)
+            }
         }
     }
     private fun addListener(){
@@ -42,5 +61,22 @@ class OperationSelector : Fragment(R.layout.fragment_selector_operaciones),View.
 
     }
     override fun onBackPressed(): Boolean =true
+    private fun Fragment.vibratePhone() {
+        val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        if (vibrator.hasVibrator()) { // Vibrator availability checking
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(
+                    VibrationEffect.createOneShot(
+                        200,
+                        VibrationEffect.DEFAULT_AMPLITUDE
+                    )
+                ) // New vibrate method for API Level 26 or higher
+            } else {
+                @Suppress("DEPRECATION")
+                vibrator.vibrate(200) // Vibrate method for below API Level 26
+            }
+        }
+    }
+
 
 }

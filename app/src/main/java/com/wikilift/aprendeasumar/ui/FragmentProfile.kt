@@ -64,7 +64,7 @@ class FragmentProfile : Fragment(R.layout.fragment_profile),IOnBackPressed {
                 .setPositiveButton(R.string.ok,
                     DialogInterface.OnClickListener { dialog, id ->
                         MainActivity.user?.level=0
-                        MainActivity.user?.pointsToNextLevel=0
+                        MainActivity.user?.pointsToNextLevel=50
                         MainActivity.user?.points=0
                         makeText()
                         val jsonStrings = gson.toJson(MainActivity.user)
@@ -73,7 +73,7 @@ class FragmentProfile : Fragment(R.layout.fragment_profile),IOnBackPressed {
                         return@OnClickListener
                 })
 
-            // Create the AlertDialog object and return it
+
             builder.create()
             builder.show()
         }
@@ -83,10 +83,10 @@ class FragmentProfile : Fragment(R.layout.fragment_profile),IOnBackPressed {
             builder.setMessage(R.string.disclaimer)
                 .setPositiveButton(R.string.ok,
                     DialogInterface.OnClickListener { dialog, id ->
-                        // FIRE ZE MISSILES!
+
                     })
 
-            // Create the AlertDialog object and return it
+
             builder.create()
             builder.show()
         }

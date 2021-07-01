@@ -1,10 +1,10 @@
 package com.wikilift.aprendeasumar.ui
 
+import android.content.Context
 import android.content.res.ColorStateList
 import android.graphics.Color
-
-import android.os.Bundle
-import android.os.CountDownTimer
+import android.media.MediaPlayer
+import android.os.*
 
 
 import android.view.View
@@ -37,6 +37,7 @@ class FragmentMultiply : Fragment(R.layout.fragment_multiply), View.OnClickListe
     private var fail: String? = "Sin respuesta"
     private lateinit var gson: Gson
     private var back = false
+    private lateinit var mediaPlayer:MediaPlayer
     private val viewModel by viewModels<NumberViewModel> {
         NumberViewModelFactory(NumberRepoImpl(NumberDataSource()))
     }
@@ -49,14 +50,16 @@ class FragmentMultiply : Fragment(R.layout.fragment_multiply), View.OnClickListe
 
         init()
         binding.btnNext.setOnClickListener {
-
+            this.vibratePhone()
             init()
+
         }
 
     }
 
 
     private fun init() {
+        sound(R.raw.tictac, true)
         restoreColor()
         toggleDeactivateClick(true)
         back = false
@@ -144,7 +147,8 @@ class FragmentMultiply : Fragment(R.layout.fragment_multiply), View.OnClickListe
         )
         when (v) {
             binding.btn1 -> {
-
+                this.vibratePhone()
+                mediaPlayer.stop()
                 binding.btn1?.startAnimation(animation)
                 if (binding.btn1?.text.equals(result.toString())) {
                     succes()
@@ -155,7 +159,8 @@ class FragmentMultiply : Fragment(R.layout.fragment_multiply), View.OnClickListe
                 }
             }
             binding.btn2 -> {
-
+                this.vibratePhone()
+                mediaPlayer.stop()
                 binding.btn2?.startAnimation(animation)
                 if (binding.btn2?.text.equals(result.toString())) {
                     succes()
@@ -168,7 +173,8 @@ class FragmentMultiply : Fragment(R.layout.fragment_multiply), View.OnClickListe
                 }
             }
             binding.btn3 -> {
-
+                this.vibratePhone()
+                mediaPlayer.stop()
                 binding.btn3?.startAnimation(animation)
                 if (binding.btn3?.text.equals(result.toString())) {
                     succes()
@@ -200,6 +206,7 @@ class FragmentMultiply : Fragment(R.layout.fragment_multiply), View.OnClickListe
         binding.txtCounter?.visibility = View.GONE
         binding.btnAnswer?.startAnimation(animation)
         binding.txtAsk?.startAnimation(animation)
+        sound(R.raw.fail, false)
         binding.txtAsk?.append(
             "\n ${getText(R.string.error)}\n" +
                     " ${getText(R.string.answer)}:\n${result}"
@@ -224,6 +231,7 @@ class FragmentMultiply : Fragment(R.layout.fragment_multiply), View.OnClickListe
         binding.txtCounter.visibility = View.GONE
         binding.txtAsk?.startAnimation(animation)
         binding.btnAnswer?.startAnimation(animation)
+        sound(R.raw.succes, false)
         binding.txtAsk.append("\n ${getString(R.string.correct)}")
         toggleDeactivateClick(false)
         answered = true
@@ -237,10 +245,36 @@ class FragmentMultiply : Fragment(R.layout.fragment_multiply), View.OnClickListe
     }
 
     override fun onBackPressed(): Boolean {
+        mediaPlayer.stop()
         back = true
 
         return back
     }
 
+    private fun Fragment.vibratePhone() {
+        val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        if (vibrator.hasVibrator()) { // Vibrator availability checking
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(
+                    VibrationEffect.createOneShot(
+                        200,
+                        VibrationEffect.DEFAULT_AMPLITUDE
+                    )
+                ) // New vibrate method for API Level 26 or higher
+            } else {
+                @Suppress("DEPRECATION")
+                vibrator.vibrate(200) // Vibrate method for below API Level 26
+            }
+        }
+    }
+    private fun sound(resID:Int,isLooping:Boolean) {
+        mediaPlayer = MediaPlayer.create(context,resID)
+        if(isLooping){
+            mediaPlayer.isLooping=true
+        }
+        mediaPlayer.start()
+
+
+    }
 }
 
