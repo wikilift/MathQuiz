@@ -8,7 +8,7 @@ import com.wikilift.aprendeasumar.data.model.NumberToShow
 import com.wikilift.aprendeasumar.repository.NumberRepo
 
 
-class NumberViewModel(private val repo:NumberRepo): ViewModel() {
+class NumberViewModel(private val repo: NumberRepo): ViewModel() {
     fun fetchInfo(): NumberToShow = repo.getData()
 }
 

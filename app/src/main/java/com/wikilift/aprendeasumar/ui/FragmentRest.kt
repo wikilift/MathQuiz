@@ -19,21 +19,24 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.gson.Gson
 import com.wikilift.aprendeasumar.MainActivity
-
 import com.wikilift.aprendeasumar.R
+
 
 import com.wikilift.aprendeasumar.data.local.NumberDataSource
 import com.wikilift.aprendeasumar.data.model.User
-import com.wikilift.aprendeasumar.databinding.FragmentMainScreenBinding
+
+
+import com.wikilift.aprendeasumar.databinding.FragmentrestBinding
+
 
 import com.wikilift.aprendeasumar.repository.NumberRepoImpl
 import com.wikilift.aprendeasumar.viewModel.NumberViewModel
 import com.wikilift.aprendeasumar.viewModel.NumberViewModelFactory
 
 
-class FragmentRest : Fragment(R.layout.fragment_rest), View.OnClickListener, IOnBackPressed {
+class FragmentRest : Fragment(R.layout.fragmentrest), View.OnClickListener, IOnBackPressed {
 
-    private lateinit var binding: FragmentMainScreenBinding
+    private lateinit var binding: FragmentrestBinding
     private var result: Int = 0
     private var answered = false
     private var fail: String? = "Sin respuesta"
@@ -47,7 +50,7 @@ class FragmentRest : Fragment(R.layout.fragment_rest), View.OnClickListener, IOn
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentMainScreenBinding.bind(view)
+        binding = FragmentrestBinding.bind(view)
         gson = Gson()
 
         init()
@@ -107,11 +110,13 @@ class FragmentRest : Fragment(R.layout.fragment_rest), View.OnClickListener, IOn
             }
 
             override fun onFinish() {
+                mediaPlayer.stop()
                 if (answered) {
                     cancel()
                 } else {
                     if (!back) {
                         fail()
+                        cancel()
                     }
 
 

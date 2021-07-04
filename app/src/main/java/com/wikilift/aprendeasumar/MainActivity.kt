@@ -2,17 +2,18 @@ package com.wikilift.aprendeasumar
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.os.Build
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.VibrationEffect
-import android.os.Vibrator
-import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+
 
 import com.google.gson.Gson
+
+
 import com.wikilift.aprendeasumar.data.model.User
 import com.wikilift.aprendeasumar.ui.IOnBackPressed
+import com.wikilift.aprendeasumar.ui.LandingFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         prefs = Prefs(applicationContext)
 
 
+
     }
 
     companion object {
@@ -33,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onBackPressed() {
+   override fun onBackPressed() {
         val navHost = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)
         navHost?.let { navFragment ->
             navFragment.childFragmentManager.primaryNavigationFragment?.let { fragment ->
@@ -49,10 +51,10 @@ class MainActivity : AppCompatActivity() {
 
 }
 class Prefs (context: Context) {
-    val PREFS_NAME = "com.wikilift.aprendeasumar"
-    val SHARED_NAME = "shared_name"
-    val prefs: SharedPreferences = context.getSharedPreferences(PREFS_NAME, 0)
-    var name: String?
+    private val PREFS_NAME = "com.wikilift.aprendeasumar"
+    private val SHARED_NAME = "shared_name"
+    private val prefs: SharedPreferences = context.getSharedPreferences(PREFS_NAME, 0)
+     var name: String?
         get() = prefs.getString(SHARED_NAME, "")
         set(value) = prefs.edit().putString(SHARED_NAME, value).apply()
 }

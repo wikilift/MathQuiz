@@ -1,54 +1,59 @@
 package com.wikilift.aprendeasumar.ui
 
+
 import android.content.Context
-import android.os.Build
-import android.os.Bundle
-import android.os.VibrationEffect
-import android.os.Vibrator
+
+import android.os.*
+
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+
 import android.view.View
-import android.view.ViewGroup
+
 import androidx.navigation.fragment.findNavController
 import com.wikilift.aprendeasumar.R
-import com.wikilift.aprendeasumar.databinding.FragmentMainScreenBinding
-import com.wikilift.aprendeasumar.databinding.FragmentSelectorOperacionesBinding
+
+import com.wikilift.aprendeasumar.databinding.FragmentoperationselectorBinding
 
 
-class OperationSelector : Fragment(R.layout.fragment_selector_operaciones),View.OnClickListener,IOnBackPressed {
+class OperationSelector : Fragment(R.layout.fragmentoperationselector),View.OnClickListener,
+    IOnBackPressed {
 
-    private lateinit var binding: FragmentSelectorOperacionesBinding
+    private lateinit var binding: FragmentoperationselectorBinding
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentSelectorOperacionesBinding.bind(view)
+        binding = FragmentoperationselectorBinding.bind(view)
         addListener()
-
 
     }
 
+
     override fun onClick(v: View?) {
+
         when(v){
             binding.sum->{
                 this.vibratePhone()
-                findNavController().navigate(R.id.action_selectorOperaciones_to_mainScreen)
+                findNavController().navigate(R.id.action_operationSelector_to_mainScreen)
             }
             binding.rest->{
                 this.vibratePhone()
-                findNavController().navigate(R.id.action_selectorOperaciones_to_fragmentRest)
+               findNavController().navigate(R.id.action_operationSelector_to_fragmentRest)
+
             }
             binding.multiply->{
                 this.vibratePhone()
-                findNavController().navigate(R.id.action_selectorOperaciones_to_fragmentMultiply)
+                findNavController().navigate(R.id.action_operationSelector_to_fragmentMultiply)
             }
             binding.div->{
                 this.vibratePhone()
-                findNavController().navigate(R.id.action_selectorOperaciones_to_fragmentDiv)
+                findNavController().navigate(R.id.action_operationSelector_to_fragmentDiv)
+
             }
             binding.imgProfile->{
                 this.vibratePhone()
-                findNavController().navigate(R.id.action_selectorOperaciones_to_fragmentProfile)
+               findNavController().navigate(R.id.action_operationSelector_to_fragmentProfile)
+
             }
         }
     }

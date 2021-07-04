@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/graph"
+    app:startDestination="@id/landingFragment">
+    <fragment
+        android:id="@+id/landingFragment"
+        android:name="com.wikilift.aprendeasumar.ui.LandingFragment"
+        android:label="fragmentlanding"
+        tools:layout="@layout/fragmentlanding" >
+        <action
+            android:id="@+id/action_landingFragment_to_operationSelector"
+            app:destination="@id/operationSelector" />
+    </fragment>
+    <fragment
+        android:id="@+id/operationSelector"
+        android:name="com.wikilift.aprendeasumar.ui.OperationSelector"
+        android:label="fragmentoperationselector"
+        tools:layout="@layout/fragmentoperationselector" >
+        <action
+            android:id="@+id/action_operationSelector_to_mainScreen"
+            app:destination="@id/mainScreen" />
+        <action
+            android:id="@+id/action_operationSelector_to_fragmentDiv"
+            app:destination="@id/fragmentDiv" />
+        <action
+            android:id="@+id/action_operationSelector_to_fragmentMultiply"
+            app:destination="@id/fragmentMultiply" />
+        <action
+            android:id="@+id/action_operationSelector_to_fragmentProfile"
+            app:destination="@id/fragmentProfile" />
+        <action
+            android:id="@+id/action_operationSelector_to_fragmentRest"
+            app:destination="@id/fragmentRest" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainScreen"
+        android:name="com.wikilift.aprendeasumar.ui.MainScreen"
+        android:label="fragmentmainscreen"
+        tools:layout="@layout/fragmentmainscreen" />
+    <fragment
+        android:id="@+id/fragmentDiv"
+        android:name="com.wikilift.aprendeasumar.ui.FragmentDiv"
+        android:label="fragmentdiv"
+        tools:layout="@layout/fragmentdiv" />
+    <fragment
+        android:id="@+id/fragmentMultiply"
+        android:name="com.wikilift.aprendeasumar.ui.FragmentMultiply"
+        android:label="fragmentmultiply"
+        tools:layout="@layout/fragmentmultiply" />
+    <fragment
+        android:id="@+id/fragmentProfile"
+        android:name="com.wikilift.aprendeasumar.ui.FragmentProfile"
+        android:label="fragmentprofile"
+        tools:layout="@layout/fragmentprofile" />
+    <fragment
+        android:id="@+id/fragmentRest"
+        android:name="com.wikilift.aprendeasumar.ui.FragmentRest"
+        android:label="fragmentrest"
+        tools:layout="@layout/fragmentrest" />
+</navigation>

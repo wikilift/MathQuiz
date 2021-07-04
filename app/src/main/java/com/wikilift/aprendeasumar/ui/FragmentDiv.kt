@@ -10,34 +10,40 @@ import android.os.*
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Toast
+
 
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.gson.Gson
-import com.wikilift.aprendeasumar.MainActivity
 
+
+
+import com.wikilift.aprendeasumar.MainActivity
 import com.wikilift.aprendeasumar.R
+
 
 import com.wikilift.aprendeasumar.data.local.NumberDataSource
 import com.wikilift.aprendeasumar.data.model.User
-import com.wikilift.aprendeasumar.databinding.FragmentMainScreenBinding
+
+import com.wikilift.aprendeasumar.databinding.FragmentdivBinding
+
 
 import com.wikilift.aprendeasumar.repository.NumberRepoImpl
 import com.wikilift.aprendeasumar.viewModel.NumberViewModel
 import com.wikilift.aprendeasumar.viewModel.NumberViewModelFactory
 
 
-class FragmentDiv : Fragment(R.layout.fragment_div), View.OnClickListener, IOnBackPressed {
 
-    private lateinit var binding: FragmentMainScreenBinding
+class FragmentDiv : Fragment(R.layout.fragmentdiv), View.OnClickListener, IOnBackPressed {
+
+    private lateinit var binding: FragmentdivBinding
     private var result: Int = 0
     private var answered = false
     private var fail: String? = "Sin respuesta"
     private lateinit var gson: Gson
     private var back = false
-    private lateinit var mediaPlayer:MediaPlayer
+    private lateinit var mediaPlayer: MediaPlayer
     private val viewModel by viewModels<NumberViewModel> {
         NumberViewModelFactory(NumberRepoImpl(NumberDataSource()))
     }
@@ -45,7 +51,7 @@ class FragmentDiv : Fragment(R.layout.fragment_div), View.OnClickListener, IOnBa
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentMainScreenBinding.bind(view)
+        binding = FragmentdivBinding.bind(view)
         gson = Gson()
 
         init()
@@ -107,11 +113,14 @@ class FragmentDiv : Fragment(R.layout.fragment_div), View.OnClickListener, IOnBa
             }
 
             override fun onFinish() {
+                mediaPlayer.stop()
                 if (answered) {
                     cancel()
                 } else {
                     if (!back) {
+
                         fail()
+
                     }
 
 
@@ -119,6 +128,7 @@ class FragmentDiv : Fragment(R.layout.fragment_div), View.OnClickListener, IOnBa
             }
         }.start()
     }
+
 
     private fun toggleDeactivateClick(toggle: Boolean) {
         when (toggle) {

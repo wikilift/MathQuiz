@@ -1,6 +1,6 @@
 package com.wikilift.aprendeasumar.ui
 
-import android.content.Context
+
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.media.MediaPlayer
@@ -10,28 +10,30 @@ import android.os.*
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Toast
+
 
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.gson.Gson
 import com.wikilift.aprendeasumar.MainActivity
-
 import com.wikilift.aprendeasumar.R
+
 
 import com.wikilift.aprendeasumar.data.local.NumberDataSource
 import com.wikilift.aprendeasumar.data.model.User
-import com.wikilift.aprendeasumar.databinding.FragmentMainScreenBinding
+
+import com.wikilift.aprendeasumar.databinding.FragmentmainscreenBinding
+
 
 import com.wikilift.aprendeasumar.repository.NumberRepoImpl
 import com.wikilift.aprendeasumar.viewModel.NumberViewModel
 import com.wikilift.aprendeasumar.viewModel.NumberViewModelFactory
 
 
-class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener, IOnBackPressed {
+class MainScreen : Fragment(R.layout.fragmentmainscreen), View.OnClickListener, IOnBackPressed {
 
-    private lateinit var binding: FragmentMainScreenBinding
+    private lateinit var binding: FragmentmainscreenBinding
     private var result: Int = 0
     private var answered = false
     private var fail: String? = "Sin respuesta"
@@ -45,12 +47,12 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentMainScreenBinding.bind(view)
+        binding = FragmentmainscreenBinding.bind(view)
         gson = Gson()
 
         init()
         binding.btnNext.setOnClickListener {
-            this.vibratePhone()
+           // this.vibratePhone()
             init()
 
         }
@@ -64,12 +66,11 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
         toggleDeactivateClick(true)
         back = false
         binding.btnAnswer.visibility = View.GONE
-        binding.txtTablero?.text = "${getText(R.string.student)}: ${MainActivity.user?.name}\n" +
+        binding.txtTablero.text = "${getText(R.string.student)}: ${MainActivity.user?.name}\n" +
                "${getText(R.string.points)}: ${MainActivity.user?.points}/${MainActivity.user?.pointsToNextLevel}\n" +
                "${getText(R.string.level)}: ${MainActivity.user?.level}"
         binding.txtCounter.visibility = View.VISIBLE
-        countdown()
-        answered = false
+
 
         binding.btnNext.visibility = View.GONE
         binding.btn1.visibility = View.VISIBLE
@@ -79,15 +80,17 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
         binding.btn1.setOnClickListener(this)
         binding.btn2.setOnClickListener(this)
         binding.btn3.setOnClickListener(this)
-        var obj = viewModel.fetchInfo()
+        val obj = viewModel.fetchInfo()
         obj.operation = 1
-        var test: MutableList<Int> = obj.getRandom()
+        val test: MutableList<Int> = obj.getRandom()
         result = obj.getChallenge()
 
         binding.txtAsk.text = "${obj.number1}+${obj.number2}="
         binding.btn1.text = "${obj.getRandomButton(test[0])}"
         binding.btn2.text = "${obj.getRandomButton(test[1])}"
         binding.btn3.text = "${obj.getRandomButton(test[2])}"
+        countdown()
+        answered = false
 
 
     }
@@ -100,17 +103,19 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
                 if (answered) {
                     cancel()
                 } else {
-                    binding.txtCounter?.text = (millisUntilFinished / 1000).toString()
+                    binding.txtCounter.text = (millisUntilFinished / 1000).toString()
                 }
             }
 
             override fun onFinish() {
+                mediaPlayer.stop()
                 if (answered) {
                     cancel()
                 } else {
                     if (!back) {
                         fail()
                     }
+
 
 
                 }
@@ -121,23 +126,23 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
     private fun toggleDeactivateClick(toggle: Boolean) {
         when (toggle) {
             true -> {
-                binding.btn1?.isClickable = true
-                binding.btn2?.isClickable = true
-                binding.btn3?.isClickable = true
+                binding.btn1.isClickable = true
+                binding.btn2.isClickable = true
+                binding.btn3.isClickable = true
             }
             false -> {
-                binding.btn1?.isClickable = false
-                binding.btn2?.isClickable = false
-                binding.btn3?.isClickable = false
+                binding.btn1.isClickable = false
+                binding.btn2.isClickable = false
+                binding.btn3.isClickable = false
             }
         }
 
     }
 
     private fun restoreColor() {
-        binding.btn1?.backgroundTintList = ColorStateList.valueOf(Color.rgb(52, 180, 235))
-        binding.btn2?.backgroundTintList = ColorStateList.valueOf(Color.rgb(52, 180, 235))
-        binding.btn3?.backgroundTintList = ColorStateList.valueOf(Color.rgb(52, 180, 235))
+        binding.btn1.backgroundTintList = ColorStateList.valueOf(Color.rgb(52, 180, 235))
+        binding.btn2.backgroundTintList = ColorStateList.valueOf(Color.rgb(52, 180, 235))
+        binding.btn3.backgroundTintList = ColorStateList.valueOf(Color.rgb(52, 180, 235))
     }
 
     override fun onClick(v: View?) {
@@ -147,10 +152,10 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
         )
         when (v) {
             binding.btn1 -> {
-                this.vibratePhone()
+               // this.vibratePhone()
                 mediaPlayer.stop()
-                binding.btn1?.startAnimation(animation)
-                if (binding.btn1?.text.equals(result.toString())) {
+                binding.btn1.startAnimation(animation)
+                if (binding.btn1.text.equals(result.toString())) {
                     succes()
 
                 } else {
@@ -159,10 +164,10 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
                 }
             }
             binding.btn2 -> {
-                this.vibratePhone()
+               // this.vibratePhone()
                 mediaPlayer.stop()
-                binding.btn2?.startAnimation(animation)
-                if (binding.btn2?.text.equals(result.toString())) {
+                binding.btn2.startAnimation(animation)
+                if (binding.btn2.text.equals(result.toString())) {
                     succes()
 
 
@@ -173,10 +178,10 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
                 }
             }
             binding.btn3 -> {
-                this.vibratePhone()
+               // this.vibratePhone()
                 mediaPlayer.stop()
-                binding.btn3?.startAnimation(animation)
-                if (binding.btn3?.text.equals(result.toString())) {
+                binding.btn3.startAnimation(animation)
+                if (binding.btn3.text.equals(result.toString())) {
                     succes()
 
 
@@ -196,18 +201,18 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
             context,
             R.anim.buttonanim
         )
-        binding.btnAnswer?.backgroundTintList = ColorStateList.valueOf(Color.rgb(255, 0, 0))
-        binding.btnAnswer?.text = "${fail.toString()}"
-        binding.btnAnswer?.visibility = View.VISIBLE
-        binding.btn1?.visibility = View.GONE
-        binding.btn2?.visibility = View.GONE
-        binding.btn3?.visibility = View.GONE
-        binding.btnNext?.visibility = View.VISIBLE
-        binding.txtCounter?.visibility = View.GONE
-        binding.btnAnswer?.startAnimation(animation)
-        binding.txtAsk?.startAnimation(animation)
+        binding.btnAnswer.backgroundTintList = ColorStateList.valueOf(Color.rgb(255, 0, 0))
+        binding.btnAnswer.text = "${fail.toString()}"
+        binding.btnAnswer.visibility = View.VISIBLE
+        binding.btn1.visibility = View.GONE
+        binding.btn2.visibility = View.GONE
+        binding.btn3.visibility = View.GONE
+        binding.btnNext.visibility = View.VISIBLE
+        binding.txtCounter.visibility = View.GONE
+        binding.btnAnswer.startAnimation(animation)
+        binding.txtAsk.startAnimation(animation)
         sound(R.raw.fail, false)
-        binding.txtAsk?.append(
+        binding.txtAsk.append(
             "\n ${getText(R.string.error)}\n" +
                     " ${getText(R.string.answer)}:\n${result}"
         )
@@ -229,8 +234,8 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
         binding.btn3.visibility = View.GONE
         binding.btnNext.visibility = View.VISIBLE
         binding.txtCounter.visibility = View.GONE
-        binding.txtAsk?.startAnimation(animation)
-        binding.btnAnswer?.startAnimation(animation)
+        binding.txtAsk.startAnimation(animation)
+        binding.btnAnswer.startAnimation(animation)
         sound(R.raw.succes, false)
         binding.txtAsk.append("\n ${getText(R.string.correct)}")
         toggleDeactivateClick(false)
@@ -250,7 +255,7 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
 
         return back
     }
-    private fun Fragment.vibratePhone() {
+   /* private fun Fragment.vibratePhone() {
         val vibrator = context?.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
         if (vibrator.hasVibrator()) { // Vibrator availability checking
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -265,7 +270,7 @@ class MainScreen : Fragment(R.layout.fragment_main_screen), View.OnClickListener
                 vibrator.vibrate(200) // Vibrate method for below API Level 26
             }
         }
-    }
+    }*/
     private fun sound(resID:Int,isLooping:Boolean) {
         mediaPlayer = MediaPlayer.create(context,resID)
         if(isLooping){

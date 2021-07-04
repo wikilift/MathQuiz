@@ -12,7 +12,7 @@ android {
         applicationId "com.wikilift.aprendeasumar"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 4
+        versionCode 6
         versionName "1.1"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -20,7 +20,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
@@ -63,5 +63,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.7'
     //circleimageview
     implementation 'de.hdodenhof:circleimageview:3.1.0'
+
 
 }

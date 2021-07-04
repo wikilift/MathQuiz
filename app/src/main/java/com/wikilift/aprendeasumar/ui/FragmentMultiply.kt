@@ -10,28 +10,31 @@ import android.os.*
 import android.view.View
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.Toast
 
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.google.gson.Gson
-import com.wikilift.aprendeasumar.MainActivity
 
+import com.wikilift.aprendeasumar.MainActivity
 import com.wikilift.aprendeasumar.R
+
 
 import com.wikilift.aprendeasumar.data.local.NumberDataSource
 import com.wikilift.aprendeasumar.data.model.User
-import com.wikilift.aprendeasumar.databinding.FragmentMainScreenBinding
+
+import com.wikilift.aprendeasumar.databinding.FragmentmultiplyBinding
+
 
 import com.wikilift.aprendeasumar.repository.NumberRepoImpl
 import com.wikilift.aprendeasumar.viewModel.NumberViewModel
 import com.wikilift.aprendeasumar.viewModel.NumberViewModelFactory
 
 
-class FragmentMultiply : Fragment(R.layout.fragment_multiply), View.OnClickListener, IOnBackPressed {
+class FragmentMultiply : Fragment(R.layout.fragmentmultiply), View.OnClickListener,
+    IOnBackPressed {
 
-    private lateinit var binding: FragmentMainScreenBinding
+    private lateinit var binding: FragmentmultiplyBinding
     private var result: Int = 0
     private var answered = false
     private var fail: String? = "Sin respuesta"
@@ -45,8 +48,9 @@ class FragmentMultiply : Fragment(R.layout.fragment_multiply), View.OnClickListe
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding = FragmentMainScreenBinding.bind(view)
+        binding = FragmentmultiplyBinding.bind(view)
         gson = Gson()
+
 
         init()
         binding.btnNext.setOnClickListener {
@@ -68,8 +72,7 @@ class FragmentMultiply : Fragment(R.layout.fragment_multiply), View.OnClickListe
                 "${getText(R.string.points)}: ${MainActivity.user?.points}/${MainActivity.user?.pointsToNextLevel}\n" +
                 "${getText(R.string.level)}: ${MainActivity.user?.level}"
         binding.txtCounter.visibility = View.VISIBLE
-        countdown()
-        answered = false
+
 
         binding.btnNext.visibility = View.GONE
         binding.btn1.visibility = View.VISIBLE
@@ -88,6 +91,8 @@ class FragmentMultiply : Fragment(R.layout.fragment_multiply), View.OnClickListe
         binding.btn1.text = "${obj.getRandomButton(test[0])}"
         binding.btn2.text = "${obj.getRandomButton(test[1])}"
         binding.btn3.text = "${obj.getRandomButton(test[2])}"
+        countdown()
+        answered = false
 
 
     }
@@ -105,11 +110,13 @@ class FragmentMultiply : Fragment(R.layout.fragment_multiply), View.OnClickListe
             }
 
             override fun onFinish() {
+                mediaPlayer.stop()
                 if (answered) {
                     cancel()
                 } else {
                     if (!back) {
                         fail()
+
                     }
 
 
