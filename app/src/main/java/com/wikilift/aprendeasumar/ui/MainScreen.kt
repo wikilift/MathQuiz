@@ -226,7 +226,7 @@ class MainScreen : Fragment(R.layout.fragmentmainscreen), View.OnClickListener, 
             R.anim.buttonanim
         )
 
-        binding.btnAnswer.backgroundTintList = ColorStateList.valueOf(Color.rgb(0, 255, 0))
+        binding.btnAnswer.backgroundTintList = ColorStateList.valueOf(Color.rgb(0, 200, 0))
         binding.btnAnswer.text = "$result"
         binding.btnAnswer.visibility = View.VISIBLE
         binding.btn1.visibility = View.GONE

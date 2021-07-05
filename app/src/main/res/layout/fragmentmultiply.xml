@@ -16,7 +16,7 @@
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -34,34 +34,37 @@
 
             />
 
+
         <TextView
             android:id="@+id/txt_ask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="45dp"
+            android:layout_marginTop="50dp"
             android:gravity="center"
             android:textColor="@color/white"
             android:textSize="60sp"
             android:textStyle="bold"
             tools:text="5+10="
-
+            android:layout_marginBottom="30dp"
             />
-
         <TextView
             android:id="@+id/txt_counter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="120dp"
+            android:layout_gravity="bottom"
+
+            android:layout_marginTop="200dp"
+            android:layout_marginBottom="12dp"
             android:gravity="center"
 
             android:textColor="@color/white"
             android:textSize="60sp"
             android:textStyle="bold"
-            tools:text="5"
+            tools:text="55"/>
 
-            />
+
+
 
 
     </FrameLayout>
@@ -72,6 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:background="@drawable/startbutton"
+        android:layout_marginTop="25dp"
 
         android:textColor="@color/white"
         android:textSize="22sp"
@@ -80,7 +84,8 @@
         app:cornerRadius="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline2"
+
+        app:layout_constraintTop_toBottomOf="@+id/frameLayout"
         tools:text="21" />
 
 
@@ -89,9 +94,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="100dp"
         android:layout_weight="0"
         android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/txt_tablero"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout">
@@ -150,7 +155,7 @@
 
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
-        android:text="Siguiente"
+        android:text="@string/next"
         android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -178,12 +183,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3"
         tools:text="Dani 1 puntos" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="400dp" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"

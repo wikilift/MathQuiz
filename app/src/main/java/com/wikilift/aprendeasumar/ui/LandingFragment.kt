@@ -62,7 +62,7 @@ class LandingFragment : Fragment(R.layout.fragmentlanding), IOnBackPressed {
                 binding.progressBar.visibility = View.VISIBLE
                 Handler(Looper.getMainLooper()).postDelayed({
                     binding.progressBar.visibility = View.GONE
-                   findNavController().navigate(R.id.action_operationSelector_to_mainScreen)
+                   findNavController().navigate(R.id.action_landingFragment_to_operationSelector)
 
                     /*******************************************************************************************/
                 }, 2000)
