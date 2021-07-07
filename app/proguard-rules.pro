@@ -14,7 +14,27 @@
 
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
-#-keepattributes SourceFile,LineNumberTable
+-dontshrink
+-dontoptimize
+-dontpreverify
+-verbose
+
+-keep  class * extends androidx.viewbinding.ViewBinding
+-keepnames class androidx.navigation.fragment.NavHostFragment
+
+
+
+
+
+-keepclasseswithmembers class * {
+    void onClick*(...);
+}
+-keepclasseswithmembers class * {
+    *** *Callback(...);
+}
+
+
+
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.

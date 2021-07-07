@@ -11,7 +11,11 @@
         tools:layout="@layout/fragmentlanding" >
         <action
             android:id="@+id/action_landingFragment_to_operationSelector"
-            app:destination="@id/operationSelector" />
+            app:destination="@id/operationSelector"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/operationSelector"
@@ -20,43 +24,31 @@
         tools:layout="@layout/fragmentoperationselector" >
         <action
             android:id="@+id/action_operationSelector_to_mainScreen"
-            app:destination="@id/mainScreen" />
-        <action
-            android:id="@+id/action_operationSelector_to_fragmentDiv"
-            app:destination="@id/fragmentDiv" />
-        <action
-            android:id="@+id/action_operationSelector_to_fragmentMultiply"
-            app:destination="@id/fragmentMultiply" />
+            app:destination="@id/mainScreen"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_operationSelector_to_fragmentProfile"
-            app:destination="@id/fragmentProfile" />
-        <action
-            android:id="@+id/action_operationSelector_to_fragmentRest"
-            app:destination="@id/fragmentRest" />
+            app:destination="@id/fragmentProfile"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/mainScreen"
         android:name="com.wikilift.aprendeasumar.ui.MainScreen"
         android:label="fragmentmainscreen"
-        tools:layout="@layout/fragmentmainscreen" />
-    <fragment
-        android:id="@+id/fragmentDiv"
-        android:name="com.wikilift.aprendeasumar.ui.FragmentDiv"
-        android:label="fragmentdiv"
-        tools:layout="@layout/fragmentdiv" />
-    <fragment
-        android:id="@+id/fragmentMultiply"
-        android:name="com.wikilift.aprendeasumar.ui.FragmentMultiply"
-        android:label="fragmentmultiply"
-        tools:layout="@layout/fragmentmultiply" />
+        tools:layout="@layout/fragmentmainscreen" >
+        <argument
+            android:name="operationSelector"
+            android:defaultValue="0" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentProfile"
         android:name="com.wikilift.aprendeasumar.ui.FragmentProfile"
         android:label="fragmentprofile"
         tools:layout="@layout/fragmentprofile" />
-    <fragment
-        android:id="@+id/fragmentRest"
-        android:name="com.wikilift.aprendeasumar.ui.FragmentRest"
-        android:label="fragmentrest"
-        tools:layout="@layout/fragmentrest" />
 </navigation>

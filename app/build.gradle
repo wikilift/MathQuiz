@@ -14,15 +14,15 @@ android {
         applicationId "com.wikilift.aprendeasumar"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 7
-        versionName "1.1"
+        versionCode 9
+        versionName "2.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }

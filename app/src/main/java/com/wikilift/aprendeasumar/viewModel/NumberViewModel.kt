@@ -9,7 +9,8 @@ import com.wikilift.aprendeasumar.repository.NumberRepo
 
 
 class NumberViewModel(private val repo: NumberRepo): ViewModel() {
-    fun fetchInfo(): NumberToShow = repo.getData()
+
+    fun startChallenge(): NumberToShow = repo.getData()
 }
 
 class NumberViewModelFactory(private val repo: NumberRepo):ViewModelProvider.Factory{

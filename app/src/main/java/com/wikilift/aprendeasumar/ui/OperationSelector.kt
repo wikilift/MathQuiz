@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.wikilift.aprendeasumar.R
 
 import com.wikilift.aprendeasumar.databinding.FragmentoperationselectorBinding
+import com.wikilift.aprendeasumar.core.IOnBackPressed
 
 
 class OperationSelector : Fragment(R.layout.fragmentoperationselector),View.OnClickListener,
@@ -34,20 +35,24 @@ class OperationSelector : Fragment(R.layout.fragmentoperationselector),View.OnCl
         when(v){
             binding.sum->{
                 this.vibratePhone()
-                findNavController().navigate(R.id.action_operationSelector_to_mainScreen)
+                val action=OperationSelectorDirections.actionOperationSelectorToMainScreen(1)
+                findNavController().navigate(action)
             }
             binding.rest->{
                 this.vibratePhone()
-               findNavController().navigate(R.id.action_operationSelector_to_fragmentRest)
+                val action=OperationSelectorDirections.actionOperationSelectorToMainScreen(2)
+               findNavController().navigate(action)
 
             }
             binding.multiply->{
                 this.vibratePhone()
-                findNavController().navigate(R.id.action_operationSelector_to_fragmentMultiply)
+                val action=OperationSelectorDirections.actionOperationSelectorToMainScreen(3)
+                findNavController().navigate(action)
             }
             binding.div->{
                 this.vibratePhone()
-                findNavController().navigate(R.id.action_operationSelector_to_fragmentDiv)
+                val action=OperationSelectorDirections.actionOperationSelectorToMainScreen(4)
+                findNavController().navigate(action)
 
             }
             binding.imgProfile->{
